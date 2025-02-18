@@ -37,7 +37,6 @@ class CartController extends Controller
             $cartItem->quantity += $quantity;
             $cartItem->save();
         } else {
-
             Cart::create([
                 'user_id' => $user->id,
                 'product_id' => $productId,
