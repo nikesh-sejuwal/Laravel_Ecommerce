@@ -1,6 +1,7 @@
 @props(['products'])
 @extends('layouts.app')
 
+
 @section('content')
 <div class="container mx-auto p-4">
   <div class="flex justify-center">
@@ -18,7 +19,16 @@
       <!-- @endif -->
 
       <div class="bg-white shadow-lg rounded-lg">
+        @if(session('success'))
+        <div class="text-white bg-green-500 px-2 py-1 text-xl">{{session('success')}}</div>
+
+        @endif
+
+        @if(session('failed'))
+        <div class="bg-red-500 text-white px-2 py-1 text-xl">{{session('success')}}</div>
+        @endif
         <div class="grid grid-cols-4">
+
           <div class="col-span-3">
             <div class="bg-gray-200 px-4 py-2 text-lg font-semibold">{{ __('Manage Product') }}</div>
           </div>
@@ -27,6 +37,8 @@
             <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
               Add
             </button>
+
+
 
             <!-- Main modal -->
             <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -109,14 +121,22 @@
                 <th class="px-4 py-2 border border-gray-300 text-left">Action</th>
               </tr>
             </thead>
-            @foreach($products as $product)
+            @foreach($products as $index => $product)
             <tbody>
               <tr class="hover:bg-gray-50">
-                <td class="px-4 py-2 border border-gray-300">{{$product->id}}</td>
+                <td class="px-4 py-2 border border-gray-300">{{ $products->perPage() * ($products->currentPage() - 1) + ($index + 1) }}</td>
                 <td class="px-4 py-2 border border-gray-300">{{$product->name}}</td>
-                <td class="px-4 py-2 border border-gray-300">
-                  <button class="bg-blue-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-blue-600">Edit</button>
-                  <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Delete</button>
+                <td class="px-4 py-2 border border-gray-300 flex">
+                  <a href="{{route('products.edit', $product->id)}}">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-blue-600">Edit</button>
+                  </a>
+
+                  <form action="{{route('products.destroy', $product->id)}}" method="POST" onsubmit="return confirm('Are you sure you want to remove the product')">
+                    @csrf
+                    @method("DELETE")
+                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Delete</button>
+                  </form>
+
                 </td>
               </tr>
             </tbody>
@@ -128,7 +148,7 @@
         </div>
 
         <div class="px-4 py-2 text-center text-gray-600">
-          {{ __('You are logged in!') }}
+          Products list
         </div>
       </div>
     </div>

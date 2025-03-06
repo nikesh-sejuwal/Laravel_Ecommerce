@@ -16,9 +16,9 @@
     </div>
     <div>
       <ul>
-        <li class="flex items-center pl-5 gap-2 border-b-[1px] border-b-gray-300 h-[70px] hover:text-red-400 cursor-pointer"><i class='bx bx-star text-2xl'></i><a href="#" class="font-[500]">Newest item</a></li>
-        <li class="flex items-center pl-5 gap-2 border-b-[1px] border-b-gray-300 h-[70px] hover:text-red-400 cursor-pointer"><i class='bx bx-star text-2xl'></i><a href="#" class="font-[500]">On Sale</a></li>
-        <li class="flex items-center pl-5 gap-2 border-b-[1px] hover:text-red-400 cursor-pointer  border-b-gray-300 h-[70px]"><i class='bx bx-star text-2xl'></i><a href="#" class="font-[500]">Accessories</a></li>
+        <li class="flex items-center pl-5 gap-2 border-b-[1px] border-b-gray-300 h-[70px] hover:text-red-400 cursor-pointer"><i class='bx bx-star text-2xl'></i><a href="{{route('products')}}" class="font-[500]">Newest item</a></li>
+        <li class="flex items-center pl-5 gap-2 border-b-[1px] border-b-gray-300 h-[70px] hover:text-red-400 cursor-pointer"><i class='bx bx-star text-2xl'></i><a href="{{route('products')}}" class="font-[500]">On Sale</a></li>
+        <li class="flex items-center pl-5 gap-2 border-b-[1px] hover:text-red-400 cursor-pointer  border-b-gray-300 h-[70px]"><i class='bx bx-star text-2xl'></i><a href="{{route('products')}}" class="font-[500]">Accessories</a></li>
         <li class="flex items-center hover:text-red-400 cursor-pointer pl-5 gap-2 h-[55px] border-b-[1px] border-b-gray-300"><i class='bx bx-star text-2xl'></i><a href="#" class="font-[500]">Backpack</a></li>
         <li class="flex items-center hover:text-red-400 cursor-pointer pl-5 gap-2 border-b-[1px] border-b-gray-300 h-[70px]"><i class='bx bx-star text-2xl'></i><a href="#" class="font-[500]">Dresses</a></li>
         <li class="flex items-center hover:text-red-400 cursor-pointer pl-5 gap-2 border-b-[1px] border-b-gray-300 h-[70px]"><i class='bx bx-star text-2xl'></i><a href="#" class="font-[500]">Tops and T-shirts</a></li>
@@ -35,7 +35,9 @@
         <h1 class="text-6xl font-bold m-0 h-fit mt-5">SS-2024</h1>
         <h1 class="text-6xl font-bold mb-5 h-fit">Top Trending</h1>
 
-        <button class="border-[1px] border-black px-10 py-4 mt-5 ml-3 hover:bg-red-400 hover:border-white hover:text-white ease-in-out duration-300">Shop Now</button>
+        <a href="{{route('products')}}">
+          <button class="border-[1px] border-black px-10 py-4 mt-5 ml-3 hover:bg-red-400 hover:border-white hover:text-white ease-in-out duration-300">Shop Now</button>
+        </a>
       </div>
     </div>
 
@@ -74,7 +76,7 @@
             </div>
           </div>
           <h1 class="mt-2 text-[15px] hover:border-b-red-500 hover:text-red-400">{{$product->name}}</h1>
-          <div class="flex justify-between items-center gap-4 rounded-lg h-2 mt-1 w-full">
+          <div class="flex justify-between items-center gap-4 rounded-lg h-2 mt-1 w-[70%]">
             <div class="bg-gray-300 rounded-lg w-[100%] h-2">
               <div class="bg-black rounded-e-sm rounded-s-lg w-[70%] h-2"></div>
             </div>
@@ -103,7 +105,7 @@
           <h1 class="uppercase font-semibold">enter code: <span class="bg-red-400 text-white px-2 py-1">sum50</span></h1>
         </div>
         <h1 class="text-red-500 text-6xl font-bold my-5">50% OFF</h1>
-        <button class="text-white text-lg bg-black px-10 py-4 hover:bg-red-400">Shop Now</button>
+        <a href="{{route('products')}}"><button class="text-white text-lg bg-black px-10 py-4 hover:bg-red-400">Shop Now</button></a>
       </div>
     </div>
   </div>
@@ -113,7 +115,7 @@
       <div class="flex flex-col justify-end items-start pl-8 pb-12 h-full mx-5">
         <h1 class="font-bold text-2xl text-red-400 mb-3">New Season</h1>
         <h1 class="text-white bg-black text-4xl font-bold mb-12 p-1">Summer Collection</h1>
-        <button class="text-white text-lg bg-black px-10 py-4 hover:bg-red-400 mb-12">Shop Now</button>
+        <a href="{{route('products')}}"><button class="text-white text-lg bg-black px-10 py-4 hover:bg-red-400 mb-12">Shop Now</button></a>
       </div>
     </div>
   </div>

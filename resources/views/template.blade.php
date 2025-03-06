@@ -29,14 +29,10 @@
       <div class="font-bold text-lg cursor-pointer border border-transparent hover:border-red-400 px-1.5 py-1">
         <a href="/"><img class="w-44" src="{{ asset('img/EmartLogo.png') }}" alt="Logo goes here"></a>
       </div>
-      <div class="flex flex-[0.5] justify-center items-center">
-        <input type="text" id="search" placeholder="Search anything..." class="w-full p-2.5 text-base outline-none">
-        <div class="bg-red-500 text-white p-3 px-7 cursor-pointer text-lg hover:bg-black">Search</div>
-      </div>
+
       <div class="flex items-center space-x-3">
-        <i class='bx bx-heart text-2xl cursor-pointer hover:text-red-400' title="Favourite"></i>
         <a href="{{ route('add.to.cart') }}">
-          <i class='relative bx bx-shopping-bag text-2xl cursor-pointer hover:text-red-400' title="Add to Cart">
+          <i class='relative bx bx-shopping-bag text-4xl mr-4 cursor-pointer hover:text-red-400' title="Add to Cart">
             @php
             $cartCount = \App\Models\Cart::where('user_id', Auth::id())->sum('quantity');
             @endphp
@@ -46,15 +42,13 @@
           </i>
         </a>
 
-        <a href="/login"><i class='bx bx-user text-2xl cursor-pointer hover:text-red-400' title="User"></i></a>
+        <a href="/login"><i class='bx bx-user text-4xl  cursor-pointer hover:text-red-400' title="User"></i></a>
       </div>
     </div>
     <nav class="flex justify-between items-center px-4 pb-5 shadow-md">
       <ul class="flex space-x-4 text-lg flex-wrap">
         <li class="navs"><a href="/" class="border border-transparent px-1 py-1 hover:border-b-red-400 hover:text-red-500 font-[500]">Home</a></li>
         <li class="navs"><a href="{{ route('products') }}" class="border border-transparent px-1 py-1 hover:border-b-red-400 hover:text-red-500 font-[500]">Product</a></li>
-        <li class="navs"><a href="{{route('for-you')}}" class="border border-transparent px-1 py-1 hover:border-b-red-400 hover:text-red-500 font-[500]">Made for You</a></li>
-        <li class="navs"><a href="/best-seller" class="border border-transparent px-1 py-1 hover:border-b-red-400 hover:text-red-500 font-[500]">Best Sellers</a></li>
         <li class="navs"><a href="/about-us" class="border border-transparent px-1 py-1 hover:border-b-red-400 hover:text-red-500 font-[500]">About Us</a></li>
         <li class="navs"><a href="/contact-us" class="border border-transparent px-1 py-1 hover:border-b-red-400 hover:text-red-500 font-[500]">Contact Us</a></li>
       </ul>

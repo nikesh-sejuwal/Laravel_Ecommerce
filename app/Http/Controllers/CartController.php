@@ -78,6 +78,14 @@ class CartController extends Controller
 
     public function getCheckout()
     {
-        return view('Pages.checkout');
+        $user = Auth::user();
+        $cartItems = Cart::with('product')->where('user_id', $user->id)->get();
+
+        $subtotal = 0;
+        foreach ($cartItems as $item) {
+            $subtotal += $item->product->price * $item->quantity;
+        }
+
+        return view('Pages.checkout', compact('cartItems', 'subtotal'));
     }
 }

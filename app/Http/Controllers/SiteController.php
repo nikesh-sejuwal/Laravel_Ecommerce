@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use function compact;
 
 class SiteController extends Controller
 {
@@ -21,14 +22,6 @@ class SiteController extends Controller
     public function getProduct()
     {
         return view('Pages.product');
-    }
-    public function getMadeForYou()
-    {
-        return view('Pages.made-for-you');
-    }
-    public function getBestSeller()
-    {
-        return view('Pages.best-seller');
     }
     public function getAbout()
     {

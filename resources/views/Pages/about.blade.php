@@ -4,7 +4,7 @@
 <section id="title" class=" text-center">
   <h1 class="text-5xl font-bold pb-4">About Us</h1>
   <p class=" text-center w-1/2 mx-auto text-[17px]">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo, atque. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam, quo.</p>
-  <img src="{{asset('img/chill-guy.webp')}}" alt="no-about-img" class="mt-10 mx-auto w-[80%]">
+  <img src="{{asset('img/landing.jpg')}}" alt="no-about-img" class="mt-10 mx-auto w-[80%]">
 </section>
 <section class="w-[80%] mx-auto mt-16">
   <h1 class="text-[36px] mb-7">E-Mart - Your Premier Shopping Destination in Nepal</h1>

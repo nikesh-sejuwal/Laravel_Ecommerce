@@ -92,41 +92,48 @@ class HomeController extends Controller
     }
 
 
-    // ESEWA INTEGRATION
-
-    public function paideSewa()
+    public function paideSewa(Request $request)
     {
+        $amountInDollars = $request->input('subtotal'); // Get subtotal in dollars
 
-        $amount = '200';
+        // Check if amount is valid
+        if (!$amountInDollars || $amountInDollars <= 0) {
+            return back()->withErrors('Invalid total amount');
+        }
 
+        // Convert to Nepali Rupees (1 USD = 139 NPR)
+        $conversionRate = 139;
+        $amountInRupees = $amountInDollars * $conversionRate;
+
+        // Generate transaction details
         $skey = '8gBm/:&EnhH.1/q';
-        $transaction_uuid =  Str::random(10);
+        $transaction_uuid = Str::random(10);
         $product_code = 'EPAYTEST';
 
-
         // Create signature
-        $dataString = "total_amount={$amount},transaction_uuid={$transaction_uuid},product_code={$product_code}";
+        $dataString = "total_amount={$amountInRupees},transaction_uuid={$transaction_uuid},product_code={$product_code}";
         $hash = hash_hmac('sha256', $dataString, $skey, true); // Use hex output
         $signature = base64_encode($hash); // Base64 encode the hash
 
+        // Generate the payment form
         $form = '
-            <form id="esewa_form" action="https://rc-epay.esewa.com.np/api/epay/main/v2/form" method="POST">
-            <input type="hidden" id="amount" name="amount" value="' . $amount . '" required>
-            <input type="hidden" id="tax_amount" name="tax_amount" value ="0" required>
-            <input type="hidden" id="total_amount" name="total_amount" value="' . $amount . '" required>
-            <input type="hidden" id="transaction_uuid" name="transaction_uuid" value="' . $transaction_uuid . '" required>
-            <input type="hidden" id="product_code" name="product_code" value ="' . $product_code . '" required>
-            <input type="hidden" id="product_service_charge" name="product_service_charge" value="0" required>
-            <input type="hidden" id="product_delivery_charge" name="product_delivery_charge" value="0" required>
-            <input type="hidden" id="success_url" name="success_url" value="https://localhost:8000/esewa/success" required>
-            <input type="hidden" id="failure_url" name="failure_url" value="https://google.com" required>
-            <input type="hidden" id="signed_field_names" name="signed_field_names" value="total_amount,transaction_uuid,product_code" required>
-            <input type="hidden" id="signature" name="signature" value="' . $signature . '" required>
-            <input value="Submit" type="submit" style="opacity: 0;">
-            </form>
-            ';
-        // dd($form);
+        <form id="esewa_form" action="https://rc-epay.esewa.com.np/api/epay/main/v2/form" method="POST">
+        <input type="hidden" id="amount" name="amount" value="' . $amountInRupees . '" required>
+        <input type="hidden" id="tax_amount" name="tax_amount" value ="0" required>
+        <input type="hidden" id="total_amount" name="total_amount" value="' . $amountInRupees . '" required>
+        <input type="hidden" id="transaction_uuid" name="transaction_uuid" value="' . $transaction_uuid . '" required>
+        <input type="hidden" id="product_code" name="product_code" value="' . $product_code . '" required>
+        <input type="hidden" id="product_service_charge" name="product_service_charge" value="0" required>
+        <input type="hidden" id="product_delivery_charge" name="product_delivery_charge" value="0" required>
+        <input type="hidden" id="success_url" name="success_url" value="https://localhost:8000/esewa/success" required>
+        <input type="hidden" id="failure_url" name="failure_url" value="https://google.com" required>
+        <input type="hidden" id="signed_field_names" name="signed_field_names" value="total_amount,transaction_uuid,product_code" required>
+        <input type="hidden" id="signature" name="signature" value="' . $signature . '" required>
+        <input value="Submit" type="submit" style="opacity: 0;">
+        </form>
+    ';
 
+        // Automatically submit the form using JavaScript
         $form .= '<script type="text/javascript">document.getElementById("esewa_form").submit();</script>';
 
         return response($form);

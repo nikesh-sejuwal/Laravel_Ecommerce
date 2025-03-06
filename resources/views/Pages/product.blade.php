@@ -15,7 +15,7 @@
         </div>
       </div>
       <h1 class="mt-2 text-[15px] hover:border-b-red-500 hover:text-red-400">{{$product->name}}</h1>
-      <div class="flex justify-between items-center gap-4 rounded-lg h-2 mt-1 w-full">
+      <div class="flex justify-between items-center gap-4 rounded-lg h-2 mt-1 w-[70%]">
         <div class="bg-gray-300 rounded-lg w-[100%] h-2">
           <div class="bg-black rounded-e-sm rounded-s-lg w-[70%] h-2"></div>
         </div>

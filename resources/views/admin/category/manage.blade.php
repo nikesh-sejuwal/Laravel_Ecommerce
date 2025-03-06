@@ -75,15 +75,18 @@
                 <th class="px-4 py-2 border border-gray-300 text-left">Action</th>
               </tr>
             </thead>
-            @foreach($categories as $category)
+            @foreach($categories as $index => $category)
             <tbody>
               <tr class="hover:bg-gray-50">
-                <td class="px-4 py-2 border border-gray-300">{{$category->id}}</td>
+                <td class="px-4 py-2 border border-gray-300">{{$index +1}}</td>
                 <td class="px-4 py-2 border border-gray-300">{{$category->name}}</td>
-                <td class="px-4 py-2 border border-gray-300">
-                  <button class="bg-blue-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-blue-600">Edit</button>
-                  <a href="
-                 "> <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Delete</button></a>
+                <td class="px-4 py-2 border border-gray-300 flex">
+                  <a href="{{route('categories.edit', $category->id)}}"><button class="bg-blue-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-blue-600">Edit</button></a>
+                  <form action="{{route('categories.destroy', $category->id)}}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?')">
+                    @csrf
+                    @method("DELETE")
+                    <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Delete</button>
+                  </form>
                 </td>
               </tr>
             </tbody>
@@ -92,7 +95,7 @@
         </div>
 
         <div class="px-4 py-2 text-center text-gray-600">
-          {{ __('You are logged in!') }}
+          Categories List
         </div>
       </div>
     </div>
